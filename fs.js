@@ -1,10 +1,5 @@
-var request = require('request');
-
-var fsConfig = {
-  base_url: 'https://api.foursquare.com/v2/venues/explore?',
-  client_id: 'Your ID',
-  client_secret: 'Your Secret',
-};
+const request = require('request');
+const fsConfig = require('./fs-config');
 
 var fsCredentials = '&client_id=' + fsConfig.client_id + '&client_secret=' + fsConfig.client_secret + '&v=20140601';
 
