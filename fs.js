@@ -1,4 +1,4 @@
-const request = require('request');
+var request = require('request');
 
 var fsConfig = {
   base_url: 'https://api.foursquare.com/v2/venues/explore?',
@@ -17,9 +17,19 @@ function loadVenues(locationName, venueKeyword) {
     json: {},
   };
   request(requestOptions, function (err, response, body) {
-    var venues = body.response.groups[0].items;
-    console.log(requestOptions);
-    console.log(venues);
+    const venues = body.response.groups[0].items;
+    const checkins = [];
+    for (let i = 0; i < venues.length; i++) {
+      const venue = venues[i];
+      const checkin = {
+        name: venue.venue.name,
+        checkins: venue.venue.stats.checkinsCount,
+        users: venue.venue.stats.usersCount,
+      };
+      checkins.push(checkin);
+    }
+
+    console.log(checkins);
   });
 }
 
